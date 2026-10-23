@@ -375,5 +375,8 @@
   }
   function selectedValues(name){return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(x=>x.value);}
   function setStatus(id, text, error) { const el=$(id); el.textContent=text; el.className='status '+(error?'error':'ok'); }
+  if (new URL(location.href).searchParams.get('open') === 'module' && tg?.initData) {
+    window.setTimeout(() => { void openCourse(); }, 0);
+  }
 })();
 
