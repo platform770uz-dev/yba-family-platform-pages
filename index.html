@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 4114)
-Total output lines: 183
-
 <!doctype html>
 <html lang="uz-Latn">
 <head>
@@ -56,7 +53,92 @@ Total output lines: 183
       <div class="room-nav"><button class="button quiet reel-back" data-back="welcome-room">Orqaga</button><button class="button primary reel-next" data-next="mentor-reel">Keyingisi</button></div>
     </section>
     <section class="card room reel-room" id="mentor-reel" data-room="03 · USTOZLAR VA NATIJA">
-      <p …2114 tokens truncated…>
+      <p class="eyebrow">Birinchi oqim uchun</p>
+      <h1>Oʻrganishdan ilk rolikkacha</h1>
+      <p>Professional telejurnalistlar mentor sifatida jalb qilinadi. Bolalar bilan ishlaydigan mentorlar tajribasi va kasbiy tayyorgarligiga qarab tanlanadi.</p>
+      <div class="reel-points"><span>📺</span><p>Oqim shakllangach, obuna doirasida bitta sinov roligi va sinov darsida qatnashish imkoniyati beriladi.</p></div>
+      <div class="reel-points"><span>▶️</span><p>Rolikni YouTube yoki Instagramʼda joylash alohida kelishiladi; eʼlon qilish uchun ota-onaning roziligi olinadi.</p></div>
+      <p class="reel-note">Rolda qatnashish, ish, mashhurlik yoki ijtimoiy tarmoqlarda joylash kafolatlanmaydi.</p>
+      <div class="reel-progress" aria-label="3 / 4"><i class="active"></i><i class="active"></i><i class="active"></i><i></i></div>
+      <div class="room-nav"><button class="button quiet reel-back" data-back="platform-reel">Orqaga</button><button class="button primary reel-next" data-next="payment-room">Keyingisi</button></div>
+    </section>
+    <section class="card room" id="schedule-panel" data-room="KURS XONASI" hidden>
+      <p class="eyebrow">Oflayn kurs</p><h2>Jadval va kurs tarkibi</h2>
+      <div id="schedule-content"><p>[JADVAL — egasi beradi]</p></div>
+      <button class="button secondary" id="load-schedule">Jadvalni koʻrish</button>
+      <button class="button primary" id="confirm-schedule" disabled>Shu jadvalni tasdiqlayman</button>
+      <div class="room-nav"><button class="button quiet" id="schedule-back">Orqaga</button><button class="button primary" id="schedule-next" disabled>Keyingisi</button></div>
+      <p id="schedule-status" class="status" aria-live="polite"></p>
+    </section>
+    <section class="card room" id="media-panel" data-room="IJOD XONASI" hidden>
+      <p class="eyebrow">Alohida va ixtiyoriy rozilik</p><h2>Suratga olish va eʼlon qilish</h2>
+      <p>Bu rozilik test natijasini CRMʼga yuborish roziligidan mustaqil. Uni bermasangiz ham boshqa funksiyalar oʻzgarmaydi.</p>
+      <label class="check-line"><input id="media-consent" type="checkbox"><span>Men ota-ona yoki qonuniy vakil sifatida bolamni kurs doirasida suratga olish va materialni oldindan kelishilgan maqsadda eʼlon qilishga alohida rozilik beraman. Ushbu rozilik ixtiyoriy va boshqa roziliklardan mustaqil.</span></label>
+      <button class="button secondary" id="save-media-consent">Alohida rozilikni saqlash</button><p id="media-status" class="status" aria-live="polite"></p>
+      <div class="room-nav"><button class="button quiet" id="media-back">Orqaga</button><button class="button primary" id="media-next">Keyingisi</button></div>
+    </section>
+    <section class="card room" id="modules-panel" data-room="PLATFORMA XONASI" hidden>
+      <p class="eyebrow">1-modul · 7 kun · har kuni 10–15 daqiqa</p>
+      <h2 id="module-title">Men va mening kontent gʻoyam</h2>
+      <p id="module-intro">Yetti kichik mashgʻulot orqali qiziqishlaringizni, sizga yoqadigan ishlarni va yaratmoqchi boʻlgan kontent turini bilib olasiz.</p>
+      <p class="privacy-note">Bu test isteʼdod yoki qobiliyatga baho bermaydi. Javoblar va yakuniy natija shu ochiq sahifadagina hisoblanadi; serverga yuborilmaydi va brauzer xotirasiga saqlanmaydi.</p>
+      <fieldset class="age-select"><legend>Yosh guruhini tanlang</legend>
+        <label><input type="radio" name="module-age" value="7-10"> 7–10 yosh</label>
+        <label><input type="radio" name="module-age" value="11-14"> 11–14 yosh</label>
+      </fieldset>
+      <div id="module-days" class="module-days" hidden></div>
+      <div id="module-lesson" aria-live="polite"></div>
+      <div id="module-profile" class="module-profile" hidden></div>
+      <p id="module-progress-note" class="small-note" hidden>Yakunlangan holat qayd etildi. Javoblar va natija qayd etilmadi.</p>
+      <div class="room-nav"><button class="button quiet" id="modules-back">Orqaga</button></div>
+      <p id="progress-status" class="status" aria-live="polite"></p>
+    </section>
+    <section class="card room payment-room" id="products" data-room="YAKUNIY XONA · MAHSULOT TANLOVI" hidden>
+      <h2>Ikki alohida yoʻnalish</h2>
+      <p>Har bir yoʻnalish mustaqil xizmat. Mini App-platforma uchun toʻlov yoʻriqnomasi keyingi xonada ko‘rsatiladi. Bu sahifada toʻlov olinmaydi.</p>
+      <div class="product"><div class="product-head"><h3>Mini App-platforma</h3><b>99 000 soʻm / 30 kun</b></div>
+        <p>Mustaqil platforma: 30 kun davomida 4 nazariy modul, testlar va topshiriqlar. Mentor tekshiruvi kirmaydi.</p>
+        <ul><li>1-modul toʻlov tasdiqlangach ochiladi</li><li>Keyingi modullar 7, 14 va 21-kunlarda</li><li>30 kun tugagach kirish avtomatik yopiladi</li></ul>
+        <button class="button secondary choose-product" data-product="platform_30d">Platformani tanlash</button>
+      </div>
+      <div class="product"><div class="product-head"><h3>Oflayn kurs</h3><b>800 000 soʻm / oy</b></div>
+        <p>Alohida, studiyadagi oylik kurs: jadval asosida mashgʻulotlar va suratga olish. Oyiga bitta shaxsiy montaj qilingan rolik.</p>
+        <p class="notice">Toʻlovdan oldin jadval va kurs tarkibini koʻrib chiqib, tasdiqlash kerak: <strong>[JADVAL — egasi beradi]</strong></p>
+        <p>Kursdan keyin bolani kelajakdagi media-loyihalar uchun ochiq mezonlar asosida koʻrib chiqishlari mumkin: <strong>[KRITERIYLAR — egasi beradi]</strong>. Tanlov kafolatlanmaydi; rol, ish yoki mashhurlik vaʼda qilinmaydi.</p>
+        <p>Bolani suratga olish yoki materialni eʼlon qilish uchun ota-onaning alohida roziligi olinadi.</p>
+        <button class="button secondary choose-product" data-product="in_person_month">Oflayn kursni tanlash</button>
+      </div>
+      <p id="payment-status" class="status" aria-live="polite">Mahsulot tanlang. Bu toʻlov emas; toʻlov tugmasi mavjud emas.</p>
+      <div class="room-nav"><button class="button quiet" id="products-back">Orqaga</button><button class="button primary" id="products-next" disabled>Keyingisi</button></div>
+      <p class="payment-footnote">Hech qanday natija, saralash, rol, ish yoki mashhurlik vaʼda qilinmaydi. Haqiqiy toʻlov bu Mini App ichida amalga oshmaydi.</p>
+    </section>
+    <section class="card room payment-room reel-room" id="payment-room" data-room="04 · TOʻLOV USULI">
+      <p class="eyebrow">Mini App-platforma · 30 kun</p>
+      <h2>Toʻlov yoʻriqnomasi</h2>
+      <div class="product-head"><h3>Jami</h3><b>99 000 soʻm</b></div>
+      <p>Toʻlov usulini tanlang va toʻlovni amalga oshiring. Shundan keyin «Toʻlov qildim» tugmasini bosing — admin darhol xabar oladi.</p>
+      <div class="button-row payment-methods">
+        <button class="button secondary" id="select-cash" type="button">Naqd</button>
+        <button class="button secondary" id="select-card" type="button">Karta</button>
+      </div>
+      <p id="payment-request-status" class="status" aria-live="polite">Hali usul tanlanmagan.</p>
+      <div class="product" id="card-payment-details" hidden>
+        <h3>Karta orqali toʻlov</h3>
+        <p>Kartadan oʻtkazma: <strong class="account-number">5614 6834 0135 3842</strong></p>
+        <p>Karta egasi: <strong>JAMSHIDALI TILAVOLDIYEV</strong></p>
+        <p>Oʻtkazmani amalga oshirgach, bank ilovasidagi haqiqiy chekni ofis adminʼiga koʻrsating.</p>
+        <button class="button primary payment-submit" id="confirm-card-payment" type="button">Toʻlov qildim — adminga yuborish</button>
+      </div>
+      <div class="product" id="cash-payment-details" hidden>
+        <h3>Naqd toʻlov</h3>
+        <p>Naqd pulni ofis adminʼiga topshiring. Pulni berganingizdan keyin quyidagi tugmani bosing.</p>
+        <button class="button primary payment-submit" id="confirm-cash-payment" type="button">Naqd pulni topshirdim — adminga yuborish</button>
+      </div>
+      <p class="notice">Toʻlov Mini App ichida olinmaydi. Admin tasdiqlagandan keyin Telegramʼga elektron tasdiq yuboriladi. Bu fiskal chek emas; fiskal chek alohida rasmiylashtiriladi.</p>
+      <p class="small-note">Agar ota-ona kartasi topilmasa, botda /start ni bosing va Mini Appʼni qayta oching. Chekni Mini Appʼga yuklash shart emas.</p>
+      <div class="reel-progress" aria-label="4 / 4"><i class="active"></i><i class="active"></i><i class="active"></i><i class="active"></i></div>
+      <div class="room-nav"><button class="button quiet" id="payment-back">Orqaga</button></div>
+    </section>
     <section class="card room" id="test-panel" data-room="TANISHUV XONASI" hidden>
       <div class="progress-row"><span id="question-count">1 / 5</span><span>Natija brauzerda hisoblanadi</span></div>
       <div class="progress"><i id="progress-bar"></i></div>
