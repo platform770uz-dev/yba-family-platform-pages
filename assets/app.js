@@ -17,6 +17,9 @@
   const moduleAnswers = Object.create(null);
   const moduleDrafts = Object.create(null);
   let selectedPaymentMethod = null;
+  let activationPollTimer = null;
+  let activationPollDeadline = 0;
+  let activationPollInFlight = false;
   const $ = (id) => document.getElementById(id);
   const show = (id, yes) => { $(id).hidden = !yes; };
   const receiptToken = new URL(location.href).searchParams.get('receipt');
@@ -105,7 +108,7 @@
           submitted = true;
           $('select-cash').disabled = true; $('select-card').disabled = true;
           submitButtons.forEach(button => button.disabled = true);
-          setStatus('payment-request-status','Bu Telegram hisobida platformaga kirish allaqachon faol. Yangi toʻlov soʻrovi yuborilmadi va admin xabari joʻnatilmadi.',false);
+          await openCourse();
           return;
         }
         const messages = { parent_not_linked:'Botda /start tugmasini bosing, keyin Mini Appʼni qayta oching.', payment_card_not_ready:'Ota-ona kartasi tayyor boʻlmadi. Botda /start ni bosing, keyin qayta urinib koʻring.', no_active_admins:'Hozir adminlar xabarnomasini yuborib boʻlmadi. Keyinroq qayta urinib koʻring.' };
@@ -117,15 +120,18 @@
         submitted = true;
         $('payment-request-status').textContent = 'Toʻlov allaqachon admin tomonidan tasdiqlangan.';
         $('select-cash').disabled = true; $('select-card').disabled = true;
+        await openCourse();
       } else if (body.notificationPending) {
         $('payment-request-status').textContent = `99 000 soʻm · ${methodLabel} soʻrovi saqlandi, lekin admin xabari yetkazilgani tasdiqlanmadi. Pastdagi tugmani yana bosing yoki chekni ofis adminiga koʻrsating.`;
         submitButtons.find(button => button.id === (method === 'cash' ? 'confirm-cash-payment' : 'confirm-card-payment')).textContent = 'Xabarni qayta yuborish';
         setStatus('payment-request-status', $('payment-request-status').textContent, true);
+        startActivationPolling();
       } else {
         submitted = true;
         const status = body.notificationCreated ? `${methodLabel} toʻlovi haqida admin xabardor qilindi.` : 'Toʻlov soʻrovi avval yuborilgan; admin chekni tekshirmoqda.';
         $('payment-request-status').textContent = `${status} Haqiqiy chekni admin tekshiradi va botda tasdiqlaydi.`;
         $('select-cash').disabled = true; $('select-card').disabled = true;
+        startActivationPolling();
       }
     } catch (error) {
       setStatus('payment-request-status',error instanceof Error ? error.message : 'Soʻrov yuborilmadi.',true);
@@ -216,16 +222,17 @@
     renderModuleDays();
     renderModuleDay(moduleDay);
   }));
-  async function openCourse(){
+  async function openCourse({silent=false}={}){
     const status=$('course-entry-status');
-    if(!API_URL||!tg?.initData){setStatus('course-entry-status','Botdagi /start ni bosing va Mini Appʼni Telegram ichidan qayta oching.',true);return;}
-    const button=$('open-course');button.disabled=true;setStatus('course-entry-status','Toʻlov tasdiqlangani tekshirilmoqda…',false);
+    if(!API_URL||!tg?.initData){if(!silent)setStatus('course-entry-status','Botdagi /start ni bosing va Mini Appʼni Telegram ichidan qayta oching.',true);return false;}
+    const button=$('open-course');if(!silent){button.disabled=true;setStatus('course-entry-status','Toʻlov tasdiqlangani tekshirilmoqda…',false);}
     try{
       const r=await fetch(`${API_URL}/module?number=1`,{headers:{'x-telegram-init-data':tg.initData,'apikey':API_KEY}});
       const b=await r.json();
       if(!r.ok){
+        if(silent)return false;
         const messages={access_expired_or_missing:'Faol toʻlov topilmadi yoki 30 kunlik kirish muddati tugagan. Agar toʻlovni kecha qilgan boʻlsangiz, botdagi /start ni bosing va admin bilan bogʻlaning.',module_not_open:'1-modul hozircha ochilmagan.',module_unavailable:'Toʻlov faol, lekin 1-modul hali nashr qilinmagan. Admin modulni faollashtirishi kerak.'};
-        setStatus('course-entry-status',messages[b.error]||'Kursni ochib boʻlmadi. Botdagi /start ni bosing yoki admin bilan bogʻlaning.',true);return;
+        setStatus('course-entry-status',messages[b.error]||'Kursni ochib boʻlmadi. Botdagi /start ni bosing yoki admin bilan bogʻlaning.',true);return false;
       }
       activeModule=1;moduleContent=b.module.content;moduleAgeGroup='';moduleDay=1;
       Object.keys(moduleAnswers).forEach(k=>delete moduleAnswers[k]);Object.keys(moduleDrafts).forEach(k=>delete moduleDrafts[k]);
@@ -235,8 +242,23 @@
       $('module-progress-note').hidden=b.progress?.completed!==true;
       setStatus('course-entry-status','Toʻlov faol. 1-modul ochildi.',false);
       show('modules-panel',true);$('modules-panel').scrollIntoView({behavior:'smooth'});
-    }catch{setStatus('course-entry-status','Kirishni tekshirib boʻlmadi. Internetni tekshirib, qayta urinib koʻring.',true);}
-    finally{button.disabled=false;}
+      stopActivationPolling();
+      return true;
+    }catch{if(!silent)setStatus('course-entry-status','Kirishni tekshirib boʻlmadi. Internetni tekshirib, qayta urinib koʻring.',true);return false;}
+    finally{if(!silent)button.disabled=false;}
+  }
+  function stopActivationPolling(){if(activationPollTimer!==null){clearInterval(activationPollTimer);activationPollTimer=null;}}
+  function startActivationPolling(){
+    if(activationPollTimer!==null)return;
+    activationPollDeadline=Date.now()+10*60_000;
+    $('payment-request-status').textContent='Admin toʻlovni tasdiqlashi bilan 1-modul avtomatik ochiladi.';
+    activationPollTimer=window.setInterval(async()=>{
+      if(Date.now()>=activationPollDeadline){stopActivationPolling();return;}
+      if(document.hidden||!tg?.initData||activationPollInFlight)return;
+      activationPollInFlight=true;
+      try{if(await openCourse({silent:true}))stopActivationPolling();}
+      finally{activationPollInFlight=false;}
+    },8000);
   }
   function renderModuleDays(){
     $('module-days').replaceChildren();
@@ -354,3 +376,4 @@
   function selectedValues(name){return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(x=>x.value);}
   function setStatus(id, text, error) { const el=$(id); el.textContent=text; el.className='status '+(error?'error':'ok'); }
 })();
+
