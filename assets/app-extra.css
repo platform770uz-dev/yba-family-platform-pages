@@ -1,0 +1,94 @@
+.module-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.module-buttons .button{margin:0}.schedule-json{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fb;border-radius:12px;padding:13px;font:13px/1.5 ui-monospace,monospace;color:#33405b}
+
+/* Immersive, one-room-at-a-time Reels flow. */
+html,body{height:100%;overflow:hidden}
+body{background:#101323}
+.shell{position:relative;display:flex;flex-direction:column;width:min(100%,520px);height:100svh;margin:0 auto;padding:0;overflow-y:auto;overscroll-behavior-y:contain;scroll-snap-type:y mandatory;scrollbar-width:none;background:#f5f7ff}
+.shell::-webkit-scrollbar{display:none}
+.brand{position:fixed;z-index:20;top:calc(env(safe-area-inset-top) + 10px);left:50%;transform:translateX(-50%);width:min(calc(100% - 28px),492px);margin:0;padding:7px 12px;border:1px solid #ffffff80;border-radius:18px;background:#ffffffdf;backdrop-filter:blur(14px);box-shadow:0 8px 30px #11172b18}
+.brand-mark{width:38px;height:38px;border-radius:13px;background:#202845}
+.room{position:relative;display:flex;flex:0 0 100svh;flex-direction:column;justify-content:center;width:100%;height:100svh;min-height:100svh;margin:0;padding:calc(env(safe-area-inset-top) + 78px) 24px calc(env(safe-area-inset-bottom) + 30px);overflow-y:auto;overscroll-behavior:contain;scroll-snap-align:start;scroll-snap-stop:always;border:0;border-radius:0;box-shadow:none}
+.room[hidden]{display:none!important}
+#welcome-room{order:1}#platform-reel{order:2}#mentor-reel{order:3}#payment-room{order:4}#test-panel{order:20}#result-panel{order:21}#products{order:22}#consent-panel{order:23}#schedule-panel{order:24}#modules-panel{order:25}#media-panel{order:26}#link-panel{order:27}#delete-panel{order:28}
+.onboarding-choice{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 0;padding:0;border:0}
+.onboarding-choice legend{width:100%;margin-bottom:5px;font-size:13px;font-weight:800}
+.onboarding-choice label{display:inline-flex;align-items:center;gap:5px;padding:7px 9px;border:1px solid #dfe3ef;border-radius:12px;background:#ffffffce;font-size:12px}
+.onboarding-choice input{accent-color:#4c5cff}
+#welcome-room .field-label{margin:10px 0 5px}
+#welcome-room input:not([type=checkbox]):not([type=radio]){min-height:42px}
+.room-nav{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px}
+.room-nav .button{margin:0}
+.room::before{content:attr(data-room);position:absolute;top:calc(env(safe-area-inset-top) + 72px);right:24px;color:#7d88a5;font-size:10px;font-weight:850;letter-spacing:.13em}
+.room::after{content:"YUQORIGA SURING  ↑";display:block;margin-top:16px;color:#8b94aa;font-size:10px;font-weight:800;letter-spacing:.14em;text-align:center}
+.hero.room{padding-top:calc(env(safe-area-inset-top) + 86px);background:radial-gradient(circle at 90% 20%,#6976e9 0,transparent 36%),linear-gradient(155deg,#171d37,#303d72 70%,#485796);color:white}
+.hero.room::before,.hero.room::after{color:#c6ceff}
+.hero.room .button{margin-top:12px}
+.room#test-panel{background:linear-gradient(155deg,#f7f6ff,#ecebff)}
+.room#result-panel{background:linear-gradient(155deg,#effcf7,#e3f6ef)}
+.room#consent-panel{background:linear-gradient(155deg,#f5f7ff,#e8edff)}
+.room#schedule-panel{background:linear-gradient(155deg,#fff9ec,#fff0d7)}
+.room#modules-panel{background:linear-gradient(155deg,#f1faff,#e3f4ff)}
+.payment-room{background:radial-gradient(circle at 100% 0,#e3dcff 0,transparent 33%),linear-gradient(160deg,#171d37,#303d72 90%);color:white}
+.payment-room::before,.payment-room::after{color:#c6ceff}
+.payment-room h2,.payment-room .product h3{color:white}
+.payment-room>p,.payment-room .product p,.payment-room .product li{color:#d5daf0}
+.payment-room .product{border-color:#ffffff2e}
+.payment-room .product-head b{color:#c1c8ff}
+.payment-room .notice{background:#fff3cf;color:#5b4b1d!important}
+.payment-room .button.secondary{background:#ffffffed;color:#2f3b86}
+.payment-room .button.primary{background:#a8efcf;color:#173a2b}
+.payment-room .payment-footnote{font-size:12px;color:#c0c7df}
+.payment-room .status{color:#e1e6ff}
+.reel-room{justify-content:center;gap:10px;background:radial-gradient(circle at 90% 18%,#515db8 0,transparent 32%),linear-gradient(155deg,#171d37,#303d72 70%,#485796);color:#fff}
+.reel-room h1,.reel-room h2,.reel-room h3{color:#fff}
+.reel-room p,.reel-room .small-note{color:#f1f3ff}
+.reel-room .eyebrow{color:#d7ddff}
+#welcome-room .hero p{color:#f1f3ff}
+.reel-points{display:flex;align-items:flex-start;gap:13px;padding:13px 15px;border:1px solid #ffffff40;border-radius:16px;background:#111a3b99}
+.reel-points>span{display:grid;place-items:center;flex:0 0 38px;height:38px;border-radius:12px;background:#c8d0ff;color:#19234f;font-size:14px;font-weight:900}
+.reel-points p{margin:2px 0 0;color:#fff!important;font-size:15px;line-height:1.45}
+.reel-note{padding:12px 14px;border-radius:14px;background:#fff3cf;color:#51451e!important;font-size:13px}
+.reel-progress{display:flex;gap:7px;width:100%;margin-top:7px}
+.reel-progress i{height:4px;flex:1;border-radius:9px;background:#ffffff55}
+.reel-progress i.active{background:#d8deff}
+.reel-room .room-nav{margin-top:4px}
+.reel-room .button.quiet{background:#fff;color:#29345e}
+.reel-room .button.primary{background:#a8efcf;color:#173a2b}
+.reel-room .button{min-height:50px}
+.reel-room::after{content:"YUQORIGA SURING  ↑";color:#d5dcff}
+#welcome-room .reel-points{margin:8px 0}
+#payment-room{justify-content:flex-start;padding-top:calc(env(safe-area-inset-top) + 102px);gap:8px}
+#payment-room>p{color:#f1f3ff}
+#payment-room .product{padding:12px 0}
+#payment-room .button-row{margin:4px 0}
+#payment-room .notice{line-height:1.45}
+#payment-room .small-note{background:#111a3b;color:#f1f3ff}
+#payment-room .reel-progress{margin-top:auto}
+@media(max-height:740px){.reel-room{justify-content:flex-start;padding-top:calc(env(safe-area-inset-top) + 95px);padding-bottom:calc(env(safe-area-inset-bottom) + 22px)}#payment-room{padding-top:calc(env(safe-area-inset-top) + 88px)}}
+.choose-product.selected-product{outline:3px solid #a8efcf;outline-offset:2px}
+#products.payment-room,#payment-room.payment-room{justify-content:flex-start;padding-top:calc(env(safe-area-inset-top) + 112px);background:radial-gradient(circle at 100% 0,#414b88 0,transparent 33%),linear-gradient(160deg,#171d37,#303d72 90%)}
+#test-panel{background:linear-gradient(155deg,#f9f7ff,#eeecff)}
+#consent-panel{justify-content:flex-start}
+#schedule-panel,#media-panel,#modules-panel,#link-panel,#delete-panel{justify-content:flex-start}
+#delete-panel footer{margin-top:auto;padding:20px 0 0}
+.result-card{background:linear-gradient(145deg,#effcf7,#fff)}
+.room .button-row{margin-top:6px}
+.room .answers{margin:14px 0}
+.room .answer{background:#ffffffdf}
+.room .privacy-note,.room .small-note{line-height:1.45}
+.payment-submit{margin:10px 0 0;width:100%}
+body.receipt-verification-mode .shell{scroll-snap-type:none;background:#f5f7ff}
+body.receipt-verification-mode .shell>section:not(#receipt-verification){display:none!important}
+#receipt-verification{justify-content:center;gap:12px;background:linear-gradient(155deg,#f4f7ff,#e8edff);color:#202845}
+#receipt-verification .receipt-check-mark{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#dff6ea;color:#137749;font-size:34px;font-weight:900}
+#receipt-verification .eyebrow{margin:0;color:#68739a;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+#receipt-verification h1{margin:0;font-size:clamp(26px,7vw,36px);line-height:1.1}
+#receipt-verification .status{font-weight:800}
+.receipt-verification-details{padding:12px 15px;border:1px solid #dce2f2;border-radius:16px;background:#ffffffc9}
+.receipt-verification-details dl{display:grid;gap:10px;margin:0}
+.receipt-verification-details dl>div{display:grid;grid-template-columns:42% 1fr;gap:8px}
+.receipt-verification-details dt{color:#6b7390;font-size:13px}
+.receipt-verification-details dd{margin:0;font-weight:800;text-align:right;overflow-wrap:anywhere}
+body.receipt-verification-mode .notice{border-radius:14px}
+@media(min-width:600px){.shell{border-left:1px solid #e1e5f1;border-right:1px solid #e1e5f1}.room{padding-left:34px;padding-right:34px}}
+ .age-select{display:flex;flex-wrap:wrap;gap:10px;border:0;padding:0;margin:18px 0}.age-select legend{width:100%;font-weight:800;margin-bottom:8px}.age-select label{display:flex;align-items:center;gap:8px;padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:#fff;font-weight:700}.age-select input{accent-color:var(--blue)}.module-days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0}.module-day{border:1px solid var(--line);border-radius:11px;padding:10px 5px;background:#f5f6fb;color:var(--ink);font-weight:750}.module-day.active{background:#e9edff;border-color:var(--blue);color:#3445c7}.module-lesson{border:1px solid var(--line);border-radius:16px;padding:17px;margin:14px 0;background:#fff}.module-lesson h3{margin:0 0 8px;font-size:20px}.module-lesson h4{margin:17px 0 7px}.module-lesson p{line-height:1.55}.module-options{display:grid;gap:8px;margin:10px 0}.module-option{text-align:left;border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px 14px;color:var(--ink);font:inherit;line-height:1.4}.module-option.selected{border-color:var(--blue);background:#eef1ff}.module-draft{width:100%;min-height:90px;border:1px solid #dce1ef;border-radius:12px;padding:12px;font:inherit;line-height:1.45;resize:vertical}.module-nav{grid-template-columns:1fr 1fr;margin-top:16px}.module-profile{border-radius:16px;background:linear-gradient(145deg,#effcf7,#fff);padding:18px;margin:16px 0}.module-profile h3{margin-top:0}.module-profile li{margin:9px 0;line-height:1.45}@media(max-width:380px){.module-days{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.module-day{font-size:12px;padding:9px 2px}.module-lesson{padding:14px}}

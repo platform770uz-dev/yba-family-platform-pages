@@ -1,0 +1,2 @@
+window.YBA_CONFIG = { supabaseUrl: "https://trxnsqpdekokqvtefxlt.supabase.co", publishableKey: "sb_publishable_QLRbWoALFhs9nzyfMM8tug_U79LTk_l", miniAppApiUrl: "https://trxnsqpdekokqvtefxlt.supabase.co/functions/v1/miniapp-api" };
+window.YBA_API_URL = window.YBA_CONFIG.miniAppApiUrl;
